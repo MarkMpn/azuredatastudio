@@ -298,8 +298,7 @@ export class MigrationStateModel implements Model, vscode.Disposable {
 	constructor(
 		public extensionContext: vscode.ExtensionContext,
 		private readonly _sourceConnectionId: string,
-		public readonly migrationService: features.SqlMigrationService,
-		public readonly tdeMigrationService: features.TdeMigrationService
+		public readonly migrationService: features.SqlMigrationService
 	) {
 		this._currentState = State.INIT;
 		this._databaseBackup = {} as DatabaseBackupModel;
@@ -1100,7 +1099,7 @@ export class MigrationStateModel implements Model, vscode.Disposable {
 
 		try {
 
-			const migrationResult = await this.tdeMigrationService.migrateCertificate(
+			const migrationResult = await this.migrationService.migrateCertificate(
 				tdeEnabledDatabases,
 				connectionString,
 				this._targetSubscription?.id,
